@@ -23,15 +23,15 @@ import {
 } from 'firebase/firestore';
 
 // --- Firebase Configuration ---
-// This should be replaced with your actual Firebase project configuration.
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
+
+// const firebaseConfig = {
+//     apiKey: "YOUR_API_KEY",
+//     authDomain: "YOUR_AUTH_DOMAIN",
+//     projectId: "YOUR_PROJECT_ID",
+//     storageBucket: "YOUR_STORAGE_BUCKET",
+//     messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+//     appId: "YOUR_APP_ID"
+// };
 
 // --- Initialize Firebase Services ---
 const app = initializeApp(firebaseConfig);
@@ -39,16 +39,13 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-// ==================================================================================
-//  MAIN APP COMPONENT (The root of our application)
-// ==================================================================================
+//MAIN APP CONTENT
 export default function App() {
     const [user, setUser] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
     const [isAuthReady, setIsAuthReady] = useState(false);
     const [page, setPage] = useState('login');
 
-    // This effect runs once on mount to check the user's authentication state.
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             if (currentUser) {
@@ -97,8 +94,6 @@ export default function App() {
 
 // ==================================================================================
 //  UI & Common Components
-// ==================================================================================
-
 const Header = ({ user, userInfo, onLogout, setPage, page }) => (
     <header className="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -155,7 +150,7 @@ const EmptyState = ({ icon, title, message }) => (
 
 // ==================================================================================
 //  AUTHENTICATION SCREENS
-// ==================================================================================
+
 
 const AuthFormContainer = ({ title, children, footer }) => (
     <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-md mt-10 border border-slate-200">
@@ -267,7 +262,7 @@ const SelectField = ({ label, value, onChange, children }) => (
 
 // ==================================================================================
 //  TEACHER DASHBOARD
-// ==================================================================================
+
 
 function TeacherDashboard({ user }) {
     const [view, setView] = useState('assignments'); // 'assignments', 'create', 'submissions'
@@ -437,7 +432,7 @@ function SubmissionsView({ assignment, onBack }) {
 
 // ==================================================================================
 //  STUDENT DASHBOARD
-// ==================================================================================
+
 
 function StudentDashboard({ user }) {
     const [view, setView] = useState('assignments'); // 'assignments', 'submit'
